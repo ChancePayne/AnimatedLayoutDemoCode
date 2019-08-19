@@ -2,6 +2,10 @@ package com.lambdaschool.animatedlayoutdemocode
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.Explode
+import android.transition.Fade
+import android.transition.Slide
+import android.view.Window
 import androidx.core.content.ContextCompat
 import com.lambdaschool.animatedlayoutdemocode.model.ShoppingItem
 import kotlinx.android.synthetic.main.activity_item_detail.*
@@ -14,6 +18,11 @@ class ItemDetail : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+        window.enterTransition = Slide()
+        window.exitTransition = Fade()
+
         setContentView(R.layout.activity_item_detail)
 
         val item = intent.getSerializableExtra(ITEM_KEY) as ShoppingItem

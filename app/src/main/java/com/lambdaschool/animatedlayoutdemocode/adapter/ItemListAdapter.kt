@@ -1,7 +1,10 @@
 package com.lambdaschool.sprint2_challenge
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,7 +60,10 @@ class ItemListAdapter(val dataList: List<ShoppingItem>) :
         viewHolder.card.setOnClickListener { view ->
             val intent = Intent(view.context, ItemDetail::class.java)
             intent.putExtra(ItemDetail.ITEM_KEY, data)
-            view.context.startActivity(intent)
+
+            val optionsBundle: Bundle = ActivityOptions.makeSceneTransitionAnimation(view.context as Activity).toBundle()
+
+            view.context.startActivity(intent, optionsBundle)
         }
 
         setEnterAnimation(viewHolder.card, i)
