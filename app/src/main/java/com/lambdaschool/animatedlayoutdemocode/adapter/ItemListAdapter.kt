@@ -74,7 +74,7 @@ class ItemListAdapter(val dataList: List<ShoppingItem>) :
 
     private fun setEnterAnimation(viewToAnimate: View, position: Int) {
         if (position > lastPosition) {
-            val animation: Animation = AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.my_slide_in_left)
+            val animation: Animation = AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.hyperspace_jump)
             viewToAnimate.startAnimation(animation)
             lastPosition = position
         }
