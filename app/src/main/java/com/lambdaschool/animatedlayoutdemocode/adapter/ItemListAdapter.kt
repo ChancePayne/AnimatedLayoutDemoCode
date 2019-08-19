@@ -1,6 +1,7 @@
 package com.lambdaschool.sprint2_challenge
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +12,16 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.lambdaschool.animatedlayoutdemocode.ItemDetail
 import com.lambdaschool.animatedlayoutdemocode.R
 import com.lambdaschool.animatedlayoutdemocode.model.ShoppingItem
 import kotlinx.android.synthetic.main.shopping_item_layout.view.*
 
 import java.util.ArrayList
 
-class ItemListAdapter(private val dataList: List<ShoppingItem>) :
+class ItemListAdapter(val dataList: List<ShoppingItem>) :
     RecyclerView.Adapter<ItemListAdapter.ViewHolder>() {
+
     /**
      * Returns the total number of items in the data set held by the adapter.
      *
@@ -28,7 +31,6 @@ class ItemListAdapter(private val dataList: List<ShoppingItem>) :
         return dataList.size
     }
 
-    private var context: Context? = null
     private var lastPosition = -1  // allows us to only animate while scrolling down
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -37,60 +39,36 @@ class ItemListAdapter(private val dataList: List<ShoppingItem>) :
         val name = view.name_text as TextView
     }
 
-    fun setEnterAnimation(viewToAnimate: View, position: Int) {
-        if(position > lastPosition) {
-            val animation: Animation = AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.my_slide_in_left)
-            viewToAnimate.startAnimation(animation)
-            lastPosition = position
-        }
-    }
-
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-        context = viewGroup.context
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.shopping_item_layout, viewGroup, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val data = dataList[i]
-        val formattedName = data.name.replace("_", " ").replace("[^A-Za-z ]", "")
+//        val formattedName = data.name.replace("_", " ").replace("[^A-Za-z ]", "")
 
-        viewHolder.name.text = formattedName
-        viewHolder.image.setImageDrawable(viewHolder.image.context.getDrawable(data.drawableId))
-        viewHolder.card.tag = data.selected
+        /*val re = Regex("[^A-Za-z_ ]")
+        val formattedName = re.replace(data.name, "").replace("_", " ")*/
 
-        if (data.selected) {
-            viewHolder.card.setCardBackgroundColor(ContextCompat.getColor(viewHolder.card.context, R.color.colorAccent))
-        } else {
-            viewHolder.card.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    viewHolder.card.context,
-                    R.color.cardview_light_background
-                )
-            )
-        }
+        viewHolder.name.text = data.formattedName
+        viewHolder.image.setImageDrawable(viewHolder.image.getContext().getDrawable(data.drawableId))
 
         viewHolder.card.setOnClickListener { view ->
-            if (view.tag as Boolean) {
-                view.tag = false
-                data.selected = false
-                viewHolder.card.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        viewHolder.card.context,
-                        R.color.cardview_light_background
-                    )
-                )
-            } else {
-                view.tag = true
-                data.selected = true
-                viewHolder.card.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        viewHolder.card.context,
-                        R.color.colorAccent
-                    )
-                )
-            }
+            val intent = Intent(view.context, ItemDetail::class.java)
+            intent.putExtra(ItemDetail.ITEM_KEY, data)
+            view.context.startActivity(intent)
         }
+
         setEnterAnimation(viewHolder.card, i)
+    }
+
+
+    private fun setEnterAnimation(viewToAnimate: View, position: Int) {
+        if(position > lastPosition) {
+            val animation: Animation = AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.my_slide_in_left)
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
+        }
     }
 }
