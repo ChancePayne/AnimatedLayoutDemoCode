@@ -61,7 +61,9 @@ class ItemListAdapter(val dataList: List<ShoppingItem>) :
             val intent = Intent(view.context, ItemDetail::class.java)
             intent.putExtra(ItemDetail.ITEM_KEY, data)
 
-            val optionsBundle: Bundle = ActivityOptions.makeSceneTransitionAnimation(view.context as Activity).toBundle()
+            val optionsBundle: Bundle =
+                ActivityOptions.makeSceneTransitionAnimation(view.context as Activity, viewHolder.image, "shared_image")
+                    .toBundle()
 
             view.context.startActivity(intent, optionsBundle)
         }
@@ -71,7 +73,7 @@ class ItemListAdapter(val dataList: List<ShoppingItem>) :
 
 
     private fun setEnterAnimation(viewToAnimate: View, position: Int) {
-        if(position > lastPosition) {
+        if (position > lastPosition) {
             val animation: Animation = AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.my_slide_in_left)
             viewToAnimate.startAnimation(animation)
             lastPosition = position

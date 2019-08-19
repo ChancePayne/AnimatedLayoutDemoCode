@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.transition.Explode
 import android.transition.Fade
 import android.transition.Slide
+import android.transition.Transition
 import android.view.Window
 import androidx.core.content.ContextCompat
 import com.lambdaschool.animatedlayoutdemocode.model.ShoppingItem
@@ -20,8 +21,8 @@ class ItemDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
-        window.enterTransition = Slide()
-        window.exitTransition = Fade()
+        window.enterTransition = Explode()
+        window.exitTransition = Explode()
 
         setContentView(R.layout.activity_item_detail)
 
