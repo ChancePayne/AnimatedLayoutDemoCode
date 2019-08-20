@@ -2,7 +2,6 @@ package com.lambdaschool.sprint2_challenge
 
 import android.app.Activity
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,14 +12,11 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.lambdaschool.animatedlayoutdemocode.ItemDetail
+import com.lambdaschool.animatedlayoutdemocode.activity.ItemDetail
 import com.lambdaschool.animatedlayoutdemocode.R
 import com.lambdaschool.animatedlayoutdemocode.model.ShoppingItem
 import kotlinx.android.synthetic.main.shopping_item_layout.view.*
-
-import java.util.ArrayList
 
 class ItemListAdapter(val dataList: List<ShoppingItem>) :
     RecyclerView.Adapter<ItemListAdapter.ViewHolder>() {

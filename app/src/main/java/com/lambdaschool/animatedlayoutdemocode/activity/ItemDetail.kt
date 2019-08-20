@@ -1,13 +1,11 @@
-package com.lambdaschool.animatedlayoutdemocode
+package com.lambdaschool.animatedlayoutdemocode.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.Explode
-import android.transition.Fade
-import android.transition.Slide
-import android.transition.Transition
 import android.view.Window
 import androidx.core.content.ContextCompat
+import com.lambdaschool.animatedlayoutdemocode.R
 import com.lambdaschool.animatedlayoutdemocode.model.ShoppingItem
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
