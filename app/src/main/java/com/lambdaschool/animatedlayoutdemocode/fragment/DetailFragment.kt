@@ -29,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class DetailFragment : DialogFragment() {
+class DetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -63,7 +63,7 @@ class DetailFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val item = arguments?.getSerializable(ItemDetail.ITEM_KEY) as ShoppingItem
+        val item = arguments?.getSerializable(ItemDetail.ITEM_KEY) as ShoppingItem? ?: ShoppingItem("Empty", R.drawable.pineapple)
         fragment_item_image.setImageDrawable(context?.let { ContextCompat.getDrawable(it, item.drawableId) })
         fragment_item_name.text = item.formattedName
     }

@@ -16,13 +16,25 @@ class FragmentActivity : AppCompatActivity(), ListFragment.OnShoppingListFragmen
         Toast.makeText(this, "Fragment Interacted ${item.formattedName}", Toast.LENGTH_SHORT).show()
 
         // show fragment as dialog
-        val dialogFragment: DetailFragment = DetailFragment()
+        /*val dialogFragment: DetailFragment = DetailFragment() // DetailFragment must extend DialogFragment
 
         val bundle = Bundle()
         bundle.putSerializable(ItemDetail.ITEM_KEY, item)
 
         dialogFragment.arguments = bundle
-        dialogFragment.show(supportFragmentManager, "Detail Fragment")
+        dialogFragment.show(supportFragmentManager, "Detail Fragment")*/
+
+        // show fragment in main window
+        val fragment = DetailFragment()
+
+        val bundle = Bundle()
+        bundle.putSerializable(ItemDetail.ITEM_KEY, item)
+        fragment.arguments = bundle
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fragment_holder, fragment)
+            .addToBackStack(null)
+            .commit()
 
     }
 
