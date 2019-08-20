@@ -2,6 +2,7 @@ package com.lambdaschool.animatedlayoutdemocode.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.Explode
 import android.widget.Toast
 import com.lambdaschool.animatedlayoutdemocode.R
 import com.lambdaschool.animatedlayoutdemocode.fragment.DetailFragment
@@ -29,12 +30,21 @@ class FragmentActivity : AppCompatActivity(), ListFragment.OnShoppingListFragmen
 
         val bundle = Bundle()
         bundle.putSerializable(ItemDetail.ITEM_KEY, item)
-        fragment.arguments = bundle
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fragment_holder, fragment)
-            .addToBackStack(null)
-            .commit()
+        fragment.arguments = bundle
+        fragment.enterTransition = Explode()
+        fragment.exitTransition = Explode()
+
+        if(secondary_fragment_holder == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_fragment_holder, fragment)
+                .addToBackStack(null)
+                .commit()
+        } else {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.secondary_fragment_holder, fragment)
+                .commit()
+        }
 
     }
 
@@ -43,8 +53,13 @@ class FragmentActivity : AppCompatActivity(), ListFragment.OnShoppingListFragmen
         setContentView(R.layout.activity_fragment)
 
         val fragment = ListFragment()
+        fragment.enterTransition = Explode()
+        fragment.exitTransition = Explode()
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_fragment_holder, fragment)
             .commit()
+
+
     }
 }
