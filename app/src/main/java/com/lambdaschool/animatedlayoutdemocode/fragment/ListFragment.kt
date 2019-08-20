@@ -68,7 +68,7 @@ class ListFragment : Fragment() {
         list_fragment.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         list_fragment.layoutManager = layoutManager
-        val itemListAdapter = ItemListAdapter(ShoppingItemConstants.generateItems())
+        val itemListAdapter = ItemListAdapter(ShoppingItemConstants.generateItems(), shoppingListListener)
         list_fragment.adapter = itemListAdapter
     }
 

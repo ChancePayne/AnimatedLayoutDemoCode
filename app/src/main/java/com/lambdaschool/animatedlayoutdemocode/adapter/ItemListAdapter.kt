@@ -15,10 +15,11 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.lambdaschool.animatedlayoutdemocode.activity.ItemDetail
 import com.lambdaschool.animatedlayoutdemocode.R
+import com.lambdaschool.animatedlayoutdemocode.fragment.ListFragment
 import com.lambdaschool.animatedlayoutdemocode.model.ShoppingItem
 import kotlinx.android.synthetic.main.shopping_item_layout.view.*
 
-class ItemListAdapter(val dataList: List<ShoppingItem>) :
+class ItemListAdapter(val dataList: List<ShoppingItem>, val listener: ListFragment.OnShoppingListFragmentInteractionListener? = null) :
     RecyclerView.Adapter<ItemListAdapter.ViewHolder>() {
 
     /**
@@ -54,14 +55,18 @@ class ItemListAdapter(val dataList: List<ShoppingItem>) :
         viewHolder.image.setImageDrawable(viewHolder.image.getContext().getDrawable(data.drawableId))
 
         viewHolder.card.setOnClickListener { view ->
-            val intent = Intent(view.context, ItemDetail::class.java)
+            if (listener == null) {
+                /*val intent = Intent(view.context, ItemDetail::class.java)
             intent.putExtra(ItemDetail.ITEM_KEY, data)
 
             val optionsBundle: Bundle =
                 ActivityOptions.makeSceneTransitionAnimation(view.context as Activity, viewHolder.image, "shared_image")
                     .toBundle()
 
-            view.context.startActivity(intent, optionsBundle)
+            view.context.startActivity(intent, optionsBundle)*/
+            } else {
+                listener.onFragmentInteraction(data)
+            }
         }
 
         setEnterAnimation(viewHolder.card, i)
@@ -70,7 +75,7 @@ class ItemListAdapter(val dataList: List<ShoppingItem>) :
 
     private fun setEnterAnimation(viewToAnimate: View, position: Int) {
         if (position > lastPosition) {
-            val animation: Animation = AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.hyperspace_jump)
+            val animation: Animation = AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.my_slide_in_left)
             viewToAnimate.startAnimation(animation)
             lastPosition = position
         }
