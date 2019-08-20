@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,4 +7,16 @@
         android:layout_height="match_parent"
         tools:context=".activity.FragmentActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <fragment
+            android:id="@+id/main_fragment_holder"
+            android:name="com.lambdaschool.animatedlayoutdemocode.fragment.ListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="48sp"
+            android:text="List Fragment"/>
+</FrameLayout>
