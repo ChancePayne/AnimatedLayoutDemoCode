@@ -6,27 +6,19 @@
               android:orientation="vertical"
              tools:context=".fragment.DetailFragment">
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="48sp"
-            android:text="Detail Fragment"/>
-
     <ImageView
             android:transitionName="shared_image"
             android:layout_weight="8"
-            android:id="@+id/item_image"
+            android:id="@+id/fragment_item_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"/>
 
     <TextView
             android:layout_weight="2"
-            android:id="@+id/item_name"
+            android:id="@+id/fragment_item_name"
             android:textAlignment="center"
             android:textSize="48sp"
             android:layout_width="match_parent"
             android:layout_height="0dp"/>
-
 
 </LinearLayout>
